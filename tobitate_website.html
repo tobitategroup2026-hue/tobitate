@@ -675,22 +675,22 @@
 <footer>
   <div class="footer-logo">とびたて！保育園</div>
   <div class="footer-info">
+    <div style="margin-bottom:12px;letter-spacing:0.15em;color:rgba(253,250,245,0.6);font-size:10px;text-transform:uppercase;font-family:'Jost',sans-serif;">Hours</div>
+    <div style="margin-bottom:6px;">平日 8:30〜17:30　<span style="color:rgba(253,250,245,0.5);">延長 8:00〜18:00</span></div>
+    <div style="margin-bottom:16px;">土曜日 予約制</div>
     〒816-0974 福岡県春日市若葉台東4丁目12-3<br>
     <a href="tel:0929845377">092-984-5377</a> / 認可外保育園 / 定員14名<br>
     © 2025 Tobitate Nursery
   </div>
 </footer>
-<a href="tel:0929845377">092-984-5377</a>／電話受付 9:00〜17:00<br>
-開園時間：平日 8:30〜17:30（延長 8:00〜18:00）<br>
-土曜保育：予約制<script>
+
+<script>
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, {threshold:0.1, rootMargin:'0px 0px -32px 0px'});
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Stagger feature cards
   document.querySelectorAll('.feat-card').forEach((c,i) => c.style.transitionDelay = i*70+'ms');
   document.querySelectorAll('.plan-card').forEach((c,i) => c.style.transitionDelay = i*80+'ms');
 </script>
