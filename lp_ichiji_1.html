@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一時預かり | とびたて！保育園</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --warm-white: #fff9f4;
+    --stone: #c8b89a;
+    --sage: #7a9e7e;
+    --text: #2d2826;
+    --muted: #8a7e72;
+    --border: #e8e0d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif JP', serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ヒーロー */
+  .hero {
+    background: var(--warm-white);
+    padding: 72px 32px 64px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--stone), var(--sage), var(--stone));
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .hero h1 {
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .hero-copy {
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+  }
+  .hero-copy em {
+    font-style: normal;
+    color: var(--sage);
+  }
+  .divider {
+    width: 32px;
+    height: 1px;
+    background: var(--stone);
+    margin: 0 auto 24px;
+  }
+  .hero-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  /* セクション共通 */
+  section {
+    padding: 56px 32px;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--stone);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+  }
+
+  /* こんな方へ */
+  .for-whom {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .for-list {
+    list-style: none;
+  }
+  .for-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    line-height: 1.8;
+  }
+  .for-list li:last-child { border-bottom: none; }
+  .for-list .dot {
+    color: var(--sage);
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* 料金 */
+  .price-section { background: var(--cream); }
+  .price-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 28px;
+    margin-bottom: 16px;
+  }
+  .price-card-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--stone);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 4px;
+  }
+  .price-card-title {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .price-card-time {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f0ea;
+    font-size: 13px;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .type { color: var(--muted); }
+  .price-row .amount {
+    font-size: 18px;
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  .price-row .amount span {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Noto Serif JP', serif;
+  }
+  .price-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* とびたての特徴 */
+  .features { background: var(--warm-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .feature-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .feature-item:last-child { border-bottom: none; }
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--stone);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .feature-text h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+  .feature-text p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* 流れ */
+  .flow { background: var(--cream); }
+  .flow-steps {
+    position: relative;
+  }
+  .flow-step {
+    display: flex;
+    gap: 20px;
+    padding: 16px 0;
+    align-items: flex-start;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--sage);
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .step-content h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .step-content p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .step-arrow {
+    text-align: center;
+    color: var(--border);
+    font-size: 18px;
+    padding: 4px 0;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--text);
+    padding: 64px 32px;
+    text-align: center;
+  }
+  .cta-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--stone);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 16px;
+  }
+  .cta h2 {
+    font-size: 20px;
+    font-weight: 300;
+    color: #faf7f2;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .cta p {
+    font-size: 12px;
+    color: var(--stone);
+    margin-bottom: 36px;
+    line-height: 2;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 18px 48px;
+    background: var(--sage);
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .cta-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  /* フッター */
+  .footer {
+    background: var(--cream);
+    padding: 40px 32px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .footer-name {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.1em;
+  }
+  .footer-info {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヒーロー -->
+<div class="hero">
+  <p class="hero-label">TOBITATE HOIKUEN</p>
+  <h1>とびたて！保育園 — 一時預かり</h1>
+  <div class="divider"></div>
+  <p class="hero-copy">
+    働いていなくても、<br>
+    週2日からでも。<br>
+    まず<em>1日だけ</em>、試してみませんか。
+  </p>
+  <p class="hero-sub">
+    福岡県春日市 · 0〜2歳 · 少人数制<br>
+    オーガニック給食 · 発酵食育
+  </p>
+</div>
+
+<!-- こんな方へ -->
+<section class="for-whom">
+  <p class="section-label">FOR WHOM</p>
+  <h2 class="section-title">こんなご家庭へ</h2>
+  <ul class="for-list">
+    <li><span class="dot">·</span>少しだけ自分の時間がほしいママへ</li>
+    <li><span class="dot">·</span>就労していなくても預けていいの？と思っていた方へ</li>
+    <li><span class="dot">·</span>食や環境にこだわりたいご家庭へ</li>
+    <li><span class="dot">·</span>仕事復帰前に、園に慣れさせたい方へ</li>
+    <li><span class="dot">·</span>通院・習い事・リフレッシュに</li>
+  </ul>
+</section>
+
+<!-- 料金 -->
+<section class="price-section">
+  <p class="section-label">PRICE</p>
+  <h2 class="section-title">ご利用料金</h2>
+
+  <div class="price-card">
+    <p class="price-card-label">HALF DAY</p>
+    <h3 class="price-card-title">半日コース</h3>
+    <p class="price-card-time">9:00 〜 13:00</p>
+    <div class="price-row">
+      <span class="type">🍽 給食つき</span>
+      <span class="amount">5,000<span>円</span></span>
+    </div>
+    <div class="price-row">
+      <span class="type">🍼 ミルクのみ</span>
+      <span class="amount">3,500<span>円</span></span>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <p class="price-card-label">FULL DAY</p>
+    <h3 class="price-card-title">1日コース</h3>
+    <p class="price-card-time">9:00 〜 18:00</p>
+    <div class="price-row">
+      <span class="type">🍽 給食つき</span>
+      <span class="amount">8,000<span>円</span></span>
+    </div>
+    <div class="price-row">
+      <span class="type">🍼 ミルクのみ</span>
+      <span class="amount">6,000<span>円</span></span>
+    </div>
+  </div>
+
+  <div class="price-card">
+    <p class="price-card-label">SHORT</p>
+    <h3 class="price-card-title">時間利用</h3>
+    <p class="price-card-time">1時間単位</p>
+    <div class="price-row">
+      <span class="type">1時間</span>
+      <span class="amount">1,500<span>円</span></span>
+    </div>
+    <p class="price-note">
+      ご利用日の3日前までに公式LINEにてご予約ください。<br>
+      お支払いは現金・PayPay（前日までにお願いします）。<br>
+      対象年齢：0歳・1歳・2歳　年齢ごとに人数制限あり。
+    </p>
+  </div>
+</section>
+
+<!-- とびたての特徴 -->
+<section class="features">
+  <p class="section-label">FEATURES</p>
+  <h2 class="section-title">とびたて！保育園について</h2>
+  <div class="feature-item">
+    <span class="feature-num">1</span>
+    <div class="feature-text">
+      <h4>オーガニック給食・発酵食育</h4>
+      <p>調味料までこだわった食材。麹・発酵を取り入れた食事で、腸内環境から育てます。</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-num">2</span>
+    <div class="feature-text">
+      <h4>定員14名・少人数制</h4>
+      <p>一人ひとりと丁寧に向き合える環境。月極のお子さまと同じ空間でお預かりします。</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-num">3</span>
+    <div class="feature-text">
+      <h4>レッジョエミリアアプローチ</h4>
+      <p>世界が注目する乳幼児教育を参考に、子どもの感性と好奇心を大切にします。</p>
+    </div>
+  </div>
+  <div class="feature-item">
+    <span class="feature-num">4</span>
+    <div class="feature-text">
+      <h4>ベビーヨガ・自然素材</h4>
+      <p>身体感覚・五感を育てる本物体験。安心できる空間でのびのび過ごせます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ご利用の流れ -->
+<section class="flow">
+  <p class="section-label">FLOW</p>
+  <h2 class="section-title">ご利用の流れ</h2>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <span class="step-num">1</span>
+      <div class="step-content">
+        <h4>公式LINEに問い合わせ</h4>
+        <p>ご希望日とお子さまの年齢をお送りください。</p>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+    <div class="flow-step">
+      <span class="step-num">2</span>
+      <div class="step-content">
+        <h4>見学（はじめての方）</h4>
+        <p>まず園の空間・保育士と会っていただけます。お気軽にどうぞ。</p>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+    <div class="flow-step">
+      <span class="step-num">3</span>
+      <div class="step-content">
+        <h4>ご予約確定</h4>
+        <p>ご利用日の3日前までにLINEにてご連絡ください。</p>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+    <div class="flow-step">
+      <span class="step-num">4</span>
+      <div class="step-content">
+        <h4>当日お越しください🌿</h4>
+        <p>お支払いは前日までに現金・PayPayにて。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <p class="cta-label">CONTACT</p>
+  <h2>まず、見学からどうぞ。</h2>
+  <p>
+    お気軽に公式LINEへ。<br>
+    ご希望日とお子さまの年齢をお送りください。
+  </p>
+  <a href="https://lin.ee/YOUR_LINE_ID" class="cta-btn">公式LINEへ</a>
+  <p class="cta-note">
+    ご予約・お問い合わせはLINEにて承ります。<br>
+    見学のみのご相談もお気軽にどうぞ。
+  </p>
+</div>
+
+<!-- フッター -->
+<div class="footer">
+  <p class="footer-name">とびたて！保育園</p>
+  <p class="footer-info">
+    福岡県春日市 · 認可外保育園<br>
+    0〜2歳 少人数制（定員14名）<br>
+    月極保育 · 一時預かり
+  </p>
+</div>
+
+</body>
+</html>
