@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>とびたて！保育園 | 福岡・春日市 0〜2歳 少人数制</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --linen: #EDE6DB;
+    --stone: #C8BFB0;
+    --sage: #8A9A7E;
+    --moss: #5C6B52;
+    --bark: #6B5744;
+    --charcoal: #2C2C2A;
+    --warm-black: #1A1815;
+    --gold: #B8965A;
+    --gold-light: #D4B070;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247, 243, 238, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 191, 176, 0.3);
+    transition: padding 0.4s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--charcoal);
+  }
+
+  .nav-logo span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--charcoal);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    background: var(--moss);
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .nav-cta:hover { background: var(--charcoal); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--warm-black);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--moss);
+  }
+
+  .hero-subtitle-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(22px, 2.5vw, 34px);
+    color: var(--charcoal);
+    letter-spacing: 0.15em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2.2;
+    color: var(--bark);
+    max-width: 360px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    background: var(--moss);
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--warm-black);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--moss);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(92, 107, 82, 0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+
+  .btn-secondary:hover { border-color: var(--moss); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.5s ease 0.2s forwards;
+  }
+
+  .hero-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #D4CFC7 0%, #BEB6A8 30%, #A8A090 60%, #C4BDB2 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 60%, rgba(138, 154, 126, 0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(200, 191, 176, 0.4) 0%, transparent 50%);
+  }
+
+  .hero-image-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Decorative vertical text */
+  .hero-vertical-text {
+    position: absolute;
+    right: -28px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--stone);
+    white-space: nowrap;
+    z-index: 3;
+  }
+
+  /* ─── SECTION COMMON ─── */
+  section { position: relative; }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.6em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--warm-black);
+    margin-bottom: 24px;
+  }
+
+  .section-title-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(20px, 2vw, 28px);
+    letter-spacing: 0.1em;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+  }
+
+  /* ─── CONCEPT SECTION ─── */
+  .concept {
+    padding: 140px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .concept-left {
+    position: relative;
+  }
+
+  .concept-text {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 2.4;
+    color: var(--bark);
+    margin-bottom: 24px;
+  }
+
+  .concept-quote {
+    border-left: 1px solid var(--gold);
+    padding-left: 24px;
+    margin: 48px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--moss);
+    line-height: 1.7;
+  }
+
+  .concept-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .pillar {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    padding-top: 4px;
+  }
+
+  .pillar-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .pillar-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 2.1;
+    color: var(--bark);
+  }
+
+  /* ─── EXPERIENCE SECTION ─── */
+  .experience {
+    background: var(--warm-black);
+    padding: 140px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .experience::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(92, 107, 82, 0.15) 0%, transparent 70%);
+  }
+
+  .experience-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .experience .section-label { color: var(--gold-light); }
+  .experience .section-title { color: var(--linen); }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(200, 191, 176, 0.1);
+    margin-top: 80px;
+    border: 1px solid rgba(200, 191, 176, 0.1);
+  }
+
+  .experience-item {
+    padding: 56px 40px;
+    background: var(--warm-black);
+    transition: background 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .experience-item::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .experience-item:hover::before { transform: scaleX(1); }
+
+  .experience-item:hover {
+    background: rgba(92, 107, 82, 0.08);
+  }
+
+  .exp-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .exp-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--linen);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .exp-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 13px;
+    line-height: 2.1;
+    color: rgba(200, 191, 176, 0.7);
+  }
+
+  /* ─── FOOD SECTION ─── */
+  .food-section {
+    padding: 140px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .food-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+
+  .food-visual {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #C8C0B0, #B0A898, #9E9688);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .food-visual::after {
+    content: 'organic · 発酵 · 麹';
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .food-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 16px;
+  }
+
+  .food-item {
+    border-top: 1px solid var(--linen);
+    padding-top: 20px;
+  }
+
+  .food-item-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--moss);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .food-item-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 2;
+    color: var(--bark);
+  }
+
+  /* ─── PRICE SECTION ─── */
+  .price-section {
+    background: var(--linen);
+    padding: 140px 80px;
+  }
+
+  .price-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--cream);
+    padding: 64px;
+    position: relative;
+    margin-top: 64px;
+    border: 1px solid rgba(200, 191, 176, 0.5);
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 64px;
+    width: 80px; height: 2px;
+    background: var(--gold);
+  }
+
+  .price-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+  }
+
+  .price-type {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--charcoal);
+    letter-spacing: 0.1em;
+  }
+
+  .price-type span {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+  }
+
+  .price-amount small {
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+  }
+
+  .price-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .price-list li {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--bark);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.8;
+  }
+
+  .price-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .price-note {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--linen);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: var(--stone);
+    line-height: 2;
+  }
+
+  /* ─── FLOW SECTION ─── */
+  .flow-section {
+    padding: 140px 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .flow-steps {
+    margin-top: 80px;
+    position: relative;
+  }
+
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    left: 20px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    margin-bottom: 64px;
+    align-items: start;
+  }
+
+  .flow-num {
+    width: 40px; height: 40px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--gold);
+    background: var(--cream);
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+    margin-top: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .flow-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 2.1;
+    color: var(--bark);
+  }
+
+  .flow-highlight {
+    display: inline-block;
+    background: rgba(92, 107, 82, 0.1);
+    color: var(--moss);
+    padding: 2px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+
+  /* ─── LINE SECTION ─── */
+  .line-section {
+    background: var(--moss);
+    padding: 100px 80px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .line-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .line-section::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .line-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .line-section .section-label { color: rgba(255,255,255,0.5); }
+
+  .line-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: clamp(22px, 2.5vw, 32px);
+    color: #fff;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+
+  .line-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 2.3;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 48px;
+  }
+
+  .btn-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--moss);
+    background: #fff;
+    border: none;
+    padding: 18px 48px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-line:hover {
+    background: var(--linen);
+    transform: translateY(-2px);
+  }
+
+  .line-benefits {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 56px;
+    flex-wrap: wrap;
+  }
+
+  .line-benefit {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+  }
+
+  .line-benefit::before {
+    content: '✦';
+    display: block;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 140px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .cta-left {
+    padding-right: 80px;
+    border-right: 1px solid var(--linen);
+  }
+
+  .cta-right {
+    padding-left: 80px;
+  }
+
+  .cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-label {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--stone);
+  }
+
+  .form-input {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--charcoal);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--linen);
+    padding: 12px 0;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-input:focus {
+    border-bottom-color: var(--moss);
+  }
+
+  .form-input::placeholder {
+    color: var(--stone);
+    font-size: 13px;
+  }
+
+  .form-submit {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    background: var(--moss);
+    border: none;
+    padding: 18px 40px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .form-submit:hover {
+    background: var(--charcoal);
+    transform: translateY(-2px);
+  }
+
+  .form-note {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 11px;
+    color: var(--stone);
+    line-height: 1.8;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--warm-black);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 64px;
+  }
+
+  .footer-brand .nav-logo {
+    color: var(--linen);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand .nav-logo span { color: var(--stone); }
+
+  .footer-desc {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 12px;
+    line-height: 2.2;
+    color: rgba(200, 191, 176, 0.5);
+    margin-top: 20px;
+  }
+
+  .footer-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(200, 191, 176, 0.5);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--linen); }
+
+  .footer-info {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(200, 191, 176, 0.5);
+    line-height: 2.2;
+  }
+
+  .footer-bottom {
+    background: var(--warm-black);
+    padding: 24px 80px;
+    border-top: 1px solid rgba(200, 191, 176, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(200, 191, 176, 0.3);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 40px 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 45vw; }
+    .hero-left { padding: 60px 24px; }
+    .concept { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .experience { padding: 80px 24px; }
+    .experience-grid { grid-template-columns: 1fr; }
+    .food-section { padding: 80px 24px; }
+    .food-header { grid-template-columns: 1fr; gap: 40px; }
+    .price-section { padding: 80px 24px; }
+    .price-card { padding: 40px 24px; }
+    .price-header { flex-direction: column; gap: 24px; }
+    .price-list { grid-template-columns: 1fr; }
+    .flow-section { padding: 80px 24px; }
+    .line-section { padding: 80px 24px; }
+    .line-benefits { gap: 24px; }
+    .cta-section { grid-template-columns: 1fr; padding: 80px 24px; }
+    .cta-left { border-right: none; border-bottom: 1px solid var(--linen); padding-right: 0; padding-bottom: 48px; margin-bottom: 48px; }
+    .cta-right { padding-left: 0; }
+    footer { grid-template-columns: 1fr; padding: 48px 24px; }
+    .footer-bottom { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    とびたて！保育園
+    <span>Tobitatsu Hoikuen · Kasuga, Fukuoka</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#concept">保育理念</a></li>
+    <li><a href="#experience">過ごし方</a></li>
+    <li><a href="#food">食について</a></li>
+    <li><a href="#flow">ご入園の流れ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">見学を予約する</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Tobitatsu Hoikuen · Est. Kasuga, Fukuoka</p>
+    <h1 class="hero-title">
+      The Foundation<br>
+      of a <em>Beautiful</em><br>
+      Life.
+    </h1>
+    <p class="hero-subtitle-jp">人生の土台を、ここで。</p>
+    <p class="hero-desc">
+      0〜2歳という、脳と心がもっとも豊かに育つ時期。<br>
+      わたしたちは「預かる」のではなく、<br>
+      その子が生涯をかけて花ひらくための<br>
+      根っこを、ていねいに育みます。
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">見学を予約する</a>
+      <a href="#concept" class="btn-secondary">園の理念を知る</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img_play2.jpeg" alt="とびたて保育園" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
+    <span class="hero-vertical-text">0–2 years · 14 children · Reggio Emilia</span>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section style="padding:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;background:var(--linen);">
+  <div style="aspect-ratio:4/3;overflow:hidden;">
+    <img src="img_room1.jpeg" alt="保育室 アトリエ" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+  <div style="aspect-ratio:4/3;overflow:hidden;">
+    <img src="img_room2.jpeg" alt="保育室 全体" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+  <div style="aspect-ratio:4/3;overflow:hidden;">
+    <img src="img_room3.jpeg" alt="探求の道具" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section style="background:var(--warm-black);padding:80px;text-align:center;">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;">Our Story</p>
+  <div style="max-width:800px;margin:0 auto;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid rgba(200,191,176,0.1);">
+    <iframe
+      src="https://www.youtube.com/embed/HSCzmZ9Wz4o"
+      title="とびたて！保育園"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="position:absolute;top:0;left:0;width:100%;height:100%;">
+    </iframe>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="concept-left fade-in">
+    <p class="section-label">Philosophy</p>
+    <h2 class="section-title">Why<br><em>Tobitatsu</em></h2>
+    <div class="divider"></div>
+    <p class="concept-text">
+      「いい保育園に入れたい」ではなく、<br>
+      「この子の人生を豊かにしたい」——<br>
+      そう願う家庭のために、この園はあります。
+    </p>
+    <p class="concept-text">
+      定員14名の少人数制。<br>
+      ひとりひとりの「いま」を見つめ、<br>
+      レッジョ・エミリア・アプローチを参考に、<br>
+      子どもを主体とした環境を整えています。
+    </p>
+    <blockquote class="concept-quote">
+      "子どもは百の言葉を持っている。<br>
+      その声に、耳を澄ます。"
+    </blockquote>
+  </div>
+  <div class="concept-pillars fade-in">
+    <div class="pillar">
+      <span class="pillar-num">01</span>
+      <div>
+        <p class="pillar-title">レッジョ・エミリア・アプローチ</p>
+        <p class="pillar-desc">子どもを有能な存在として捉え、好奇心・探求・表現を軸に、環境が「第三の教育者」となる保育を実践。毎日のドキュメンテーションで育ちを可視化します。</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">02</span>
+      <div>
+        <p class="pillar-title">自然素材と本物体験</p>
+        <p class="pillar-desc">プラスチックではなく木・石・布・水。五感を通じた本物の体験が、脳の神経回路を豊かにつなぎます。季節の変化を肌で感じる環境を大切にしています。</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">03</span>
+      <div>
+        <p class="pillar-title">ベビーヨガとからだの知性</p>
+        <p class="pillar-desc">元ダンサーが監修したオリジナルプログラムを、保育士が毎日の保育の中で実践。乳幼児期から身体感覚を育み、こころとからだのつながりを大切にしながら、穏やかで安定した情緒の基盤をつくります。</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <span class="pillar-num">04</span>
+      <div>
+        <p class="pillar-title">写真・ドキュメンテーション</p>
+        <p class="pillar-desc">日々の探求の瞬間を丁寧に記録。ご家庭と育ちを共有することで、保育園と家庭が一体となって子どもを支える環境をつくります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="experience-inner">
+    <p class="section-label fade-in">Daily Life</p>
+    <h2 class="section-title fade-in">一日の、<br>豊かな時間。</h2>
+    <div class="experience-grid">
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Morning · 朝</span>
+        <h3 class="exp-title">やわらかい朝のはじまり</h3>
+        <p class="exp-desc">登園後は、自然素材の空間でゆっくりと体を目覚めさせます。日光と緑に包まれた環境で、子どもが自ら動き出す朝を大切にしています。</p>
+      </div>
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Exploration · 探求</span>
+        <h3 class="exp-title">プロジェクト型の遊びと探求</h3>
+        <p class="exp-desc">子どもの「なぜ？」から始まる探求活動。アトリエや屋外環境で、創造・実験・表現を繰り返しながら思考力の土台をつくります。</p>
+      </div>
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Lunch · 食</span>
+        <h3 class="exp-title">オーガニック給食と食育</h3>
+        <p class="exp-desc">農薬不使用の野菜、こだわりの調味料、麹や発酵を取り入れた献立。食べることは生きること——五感で味わう豊かな食卓を毎日用意します。</p>
+      </div>
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Body · からだ</span>
+        <h3 class="exp-title">ベビーヨガとからだの時間</h3>
+        <p class="exp-desc">元ダンサーが監修したオリジナルプログラムを保育士が実践。呼吸・動き・感覚を育むヨガの時間が、身体知性と自己調整力の基盤をやさしく育みます。</p>
+      </div>
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Rest · 午睡</span>
+        <h3 class="exp-title">安心できる休息の空間</h3>
+        <p class="exp-desc">オーガニックコットンの寝具、適切な温湿度管理、静かな環境。深い眠りが、脳と体の成長を支えます。</p>
+      </div>
+      <div class="experience-item fade-in">
+        <span class="exp-icon">Document · 記録</span>
+        <h3 class="exp-title">育ちのドキュメンテーション</h3>
+        <p class="exp-desc">毎日の探求と発見を写真と言葉で記録。お迎えのたびに「今日のあの子」をご家族と共有します。成長の物語を、ともに綴ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="food-section" id="food">
+  <div class="food-header fade-in">
+    <div>
+      <p class="section-label">Nourishment</p>
+      <h2 class="section-title-jp">食は、<br>命の根っこ。</h2>
+      <div class="divider"></div>
+      <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:14px;line-height:2.3;color:var(--bark);">
+        調味料ひとつから選び抜く。<br>
+        それが、とびたて保育園の食への姿勢です。<br><br>
+        乳幼児期に何を食べるかは、<br>
+        腸内環境・免疫・脳の発達に深く関わります。<br>
+        食育は、知識を教えることではなく、<br>
+        おいしさと喜びを体で覚えること。
+      </p>
+    </div>
+    <div class="food-visual" style="position:relative;overflow:hidden;">
+  <img src="img_food1.jpeg" alt="オーガニック給食" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+  <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,rgba(26,24,21,0.4));"></div>
+  <span style="position:absolute;bottom:16px;right:20px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.3em;color:rgba(255,255,255,0.7);">organic · 発酵 · 麹</span>
+</div>
+  </div>
+  <div class="food-items fade-in">
+    <div class="food-item">
+      <p class="food-item-title">オーガニック野菜</p>
+      <p class="food-item-desc">農薬・化学肥料不使用の野菜を使用。産地・生産者を確認した上で仕入れ、旬の恵みを毎日の食卓に届けます。</p>
+    </div>
+    <div class="food-item">
+      <p class="food-item-title">麹・発酵食品</p>
+      <p class="food-item-desc">米麹・味噌・甘酒など、日本の発酵の知恵を取り入れた献立。腸内環境を整え、免疫力の基盤をつくります。</p>
+    </div>
+    <div class="food-item">
+      <p class="food-item-title">調味料へのこだわり</p>
+      <p class="food-item-desc">添加物不使用の醤油・みりん・塩を厳選。素材の味を引き出す、シンプルで本物の調味料だけを使用しています。</p>
+    </div>
+    <div class="food-item">
+      <p class="food-item-title">食体験・食育活動</p>
+      <p class="food-item-desc">土に触れる、種をまく、野菜を洗う——食の全プロセスに関わることで、命への感謝と食への意識を育みます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STORY: 保育の様子 -->
+<section style="background:var(--warm-black);padding:80px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:48px;text-align:center;">A Day in Life</p>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:4px;margin-bottom:4px;">
+      <div style="overflow:hidden;aspect-ratio:4/5;">
+        <img src="img_play1.jpeg" alt="保育士と子ども" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/5;">
+        <img src="img_explore.jpeg" alt="自然の探求" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/5;">
+        <img src="img_yoga.jpeg" alt="ベビーヨガ" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:4px;">
+      <div style="overflow:hidden;aspect-ratio:4/3;">
+        <img src="img_soil1.jpeg" alt="土育" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/3;">
+        <img src="img_materials.jpeg" alt="自然素材" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:4/3;">
+        <img src="img_soil2.jpeg" alt="外遊び" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STORY: 食 -->
+<section style="background:var(--linen);padding:80px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:48px;text-align:center;">From Kitchen to Table</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;">
+      <div style="overflow:hidden;aspect-ratio:3/4;">
+        <img src="img_ingredients.jpeg" alt="こだわり食材・調味料" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:3/4;">
+        <img src="img_ferment.jpeg" alt="麹・発酵" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:3/4;">
+        <img src="img_food2.jpeg" alt="給食を食べる子ども" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:3/4;">
+        <img src="img_snack.jpeg" alt="麹おやつ" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:4px;margin-top:4px;">
+      <div style="overflow:hidden;aspect-ratio:16/7;">
+        <img src="img_food3.jpeg" alt="オーガニック給食" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="overflow:hidden;aspect-ratio:16/7;">
+        <img src="img_drink.jpeg" alt="甘酒を飲む子ども" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="price-section" id="price">
+  <div class="price-inner">
+    <p class="section-label fade-in">Investment</p>
+    <h2 class="section-title-jp fade-in">ご利用について</h2>
+    <p class="fade-in" style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:14px;line-height:2.3;color:var(--bark);">
+      一時預かりから始め、じっくりと園の空気を感じてください。<br>
+      月極保育への転換は、ご家族のペースでご検討いただけます。
+    </p>
+
+    <!-- 週2コース -->
+    <div class="price-card fade-in">
+      <div class="price-header">
+        <div class="price-type">
+          <span>Weekly 2days</span>
+          週2コース
+        </div>
+        <div class="price-amount">
+          ¥45,000<small> / 月</small>
+        </div>
+      </div>
+      <ul class="price-list">
+        <li>週2日・好きな曜日を選択</li>
+        <li>全プログラム体験可能</li>
+        <li>オーガニック給食・おやつ込み</li>
+        <li>レッジョ・エミリアアプローチ</li>
+        <li>ベビーヨガプログラム</li>
+        <li>発酵・麹食育プログラム</li>
+        <li>毎日のドキュメンテーション</li>
+        <li>自然素材・本物体験の環境</li>
+      </ul>
+      <p class="price-note">
+        開園時間：8:30〜17:30<br>
+        ※ フリーランスの方や、家族時間を大切にしながら通いたいご家庭に。
+      </p>
+    </div>
+
+    <div style="height:32px;"></div>
+
+    <!-- 週3コース -->
+    <div class="price-card fade-in">
+      <div class="price-header">
+        <div class="price-type">
+          <span>Weekly 3days</span>
+          週3コース
+        </div>
+        <div class="price-amount">
+          ¥60,000<small> / 月</small>
+        </div>
+      </div>
+      <ul class="price-list">
+        <li>週3日・好きな曜日を選択</li>
+        <li>全プログラム体験可能</li>
+        <li>オーガニック給食・おやつ込み</li>
+        <li>レッジョ・エミリアアプローチ</li>
+        <li>ベビーヨガプログラム</li>
+        <li>発酵・麹食育プログラム</li>
+        <li>毎日のドキュメンテーション</li>
+        <li>自然素材・本物体験の環境</li>
+      </ul>
+      <p class="price-note">
+        開園時間：8:30〜17:30<br>
+        ※ 徐々に慣れていきたいご家庭に。週2から週3へのステップアップも柔軟に対応します。
+      </p>
+    </div>
+
+    <div style="height:32px;"></div>
+
+    <!-- フルタイム -->
+    <div class="price-card fade-in">
+      <div class="price-header">
+        <div class="price-type">
+          <span>Full-time</span>
+          月極フルタイム
+        </div>
+        <div class="price-amount">
+          ¥80,000<small>〜 / 月</small>
+        </div>
+      </div>
+      <ul class="price-list">
+        <li>週5日フルタイム</li>
+        <li>全プログラム体験可能</li>
+        <li>オーガニック給食・おやつ込み</li>
+        <li>レッジョ・エミリアアプローチ</li>
+        <li>ベビーヨガプログラム</li>
+        <li>発酵・麹食育プログラム</li>
+        <li>毎日のドキュメンテーション</li>
+        <li>保護者向け学習会・ワークショップ</li>
+      </ul>
+      <p class="price-note">
+        開園時間：8:30〜17:30<br>
+        ※ 認可外保育施設。企業主導型保育・自治体補助金の対象可否はご相談ください。<br>
+        ※ 詳細な料金・空き状況は見学時にご説明いたします。
+      </p>
+    </div>
+
+    <div style="height:64px;"></div>
+
+    <p class="section-label fade-in" style="margin-top:0;">Temporary Care</p>
+    <h3 class="section-title-jp fade-in" style="font-size:22px;margin-bottom:16px;">一時預かり</h3>
+    <p class="fade-in" style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:13px;line-height:2.2;color:var(--bark);margin-bottom:40px;">
+      まずここから始めてみてください。<br>
+      1時間からご利用いただけます。事前登録制。
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="fade-in">
+      <div class="price-card" style="margin-top:0;">
+        <div class="price-header" style="margin-bottom:28px;">
+          <div class="price-type">
+            <span>0歳〜 Milk Support</span>
+            ミルク対応コース
+          </div>
+        </div>
+        <ul class="price-list" style="grid-template-columns:1fr;">
+          <li>1時間　¥1,500</li>
+          <li>半日　¥3,500</li>
+          <li>1日　¥5,000</li>
+        </ul>
+        <p class="price-note" style="margin-top:24px;">
+          ミルクはご持参ください。
+        </p>
+      </div>
+      <div class="price-card" style="margin-top:0;">
+        <div class="price-header" style="margin-bottom:28px;">
+          <div class="price-type">
+            <span>離乳食以降 With Meal</span>
+            給食・おやつ付きコース
+          </div>
+        </div>
+        <ul class="price-list" style="grid-template-columns:1fr;">
+          <li>1時間　¥1,500</li>
+          <li>半日　¥5,000</li>
+          <li>1日　¥8,000</li>
+        </ul>
+        <p class="price-note" style="margin-top:24px;">
+          午前午後の麹おやつ・オーガニック給食付き
+        </p>
+      </div>
+    </div>
+    <p class="fade-in" style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:12px;line-height:2;color:var(--stone);margin-top:20px;">
+      ※ 少人数制のため、ご案内できる枠に限りがあります。ご希望の方は公式LINEよりご連絡ください。
+    </p>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="flow-section" id="flow">
+  <p class="section-label fade-in">Journey</p>
+  <h2 class="section-title-jp fade-in">ご入園までの流れ</h2>
+  <p class="fade-in" style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:14px;line-height:2.3;color:var(--bark);margin-bottom:0;">
+    押しつけはしません。<br>
+    まず、この場所の空気を感じてください。
+  </p>
+  <div class="flow-steps">
+    <div class="flow-step fade-in">
+      <div class="flow-num">1</div>
+      <div>
+        <p class="flow-title">LINE登録 または お問い合わせ</p>
+        <p class="flow-desc">公式LINEをご登録いただくか、フォームよりご連絡ください。園の最新情報・空き状況・ワークショップのご案内をお届けします。</p>
+        <span class="flow-highlight">プレッシャーなし。情報収集だけでもOK</span>
+      </div>
+    </div>
+    <div class="flow-step fade-in">
+      <div class="flow-num">2</div>
+      <div>
+        <p class="flow-title">見学・個別相談（無料）</p>
+        <p class="flow-desc">実際の保育の様子をご覧いただきながら、園長がご家族のお話を伺います。所要時間は60〜90分。お子さまもご一緒にどうぞ。</p>
+        <span class="flow-highlight">月2〜4組限定の少人数見学</span>
+      </div>
+    </div>
+    <div class="flow-step fade-in">
+      <div class="flow-num">3</div>
+      <div>
+        <p class="flow-title">一時預かりで体験（推奨）</p>
+        <p class="flow-desc">まずは一時預かりでお子さまと保育園の相性を確認。給食・環境・保育士との関係をじっくり体感してからご判断いただけます。</p>
+        <span class="flow-highlight">月極転換率 ◯◯%（見学後アンケートより）</span>
+      </div>
+    </div>
+    <div class="flow-step fade-in">
+      <div class="flow-num">4</div>
+      <div>
+        <p class="flow-title">ご入園・慣らし保育</p>
+        <p class="flow-desc">お子さまのペースに合わせた慣らし保育からスタート。保護者の方との信頼関係を丁寧に築きながら、新しい「第二の家」への移行を支えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINE -->
+<section class="line-section" id="line">
+  <div class="line-inner">
+    <p class="section-label">LINE Official</p>
+    <h2 class="line-title">
+      まず、つながることから。<br>
+      公式LINEをご登録ください。
+    </h2>
+    <p class="line-desc">
+      空き状況のご案内、季節のワークショップ情報、<br>
+      食育レシピ、保育のエッセイをお届けします。<br>
+      登録だけでも、もちろんOKです。
+    </p>
+    <a href="https://lin.ee/p0Ya4" target="_blank" rel="noopener" class="btn-line">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2C5.582 2 2 5.134 2 9c0 2.56 1.476 4.8 3.718 6.12L5 16.5l1.8-.6C7.788 16.284 8.876 16.5 10 16.5c4.418 0 8-3.134 8-7s-3.582-7-8-7z" fill="#5C6B52"/>
+      </svg>
+      LINE公式アカウントを追加する
+    </a>
+    <div class="line-benefits">
+      <div class="line-benefit">空き状況を<br>いち早くお知らせ</div>
+      <div class="line-benefit">食育レシピ &amp;<br>発酵コラム配信</div>
+      <div class="line-benefit">見学予約が<br>LINEで完結</div>
+      <div class="line-benefit">ワークショップ<br>優先案内</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTOR -->
+<section style="padding:120px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:center;">
+  <div style="position:relative;">
+    <div style="aspect-ratio:3/4;overflow:hidden;">
+      <img src="img_director.jpeg" alt="園長 大戸ちえ" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+    </div>
+    <div style="position:absolute;bottom:-20px;left:-20px;width:120px;height:120px;border:1px solid var(--gold);z-index:-1;"></div>
+  </div>
+  <div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Director</p>
+    <h2 style="font-family:'Noto Serif JP',serif;font-weight:200;font-size:28px;color:var(--warm-black);letter-spacing:0.15em;margin-bottom:4px;">大戸 ちえ</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.3em;color:var(--stone);margin-bottom:40px;">Chie Oto · 園長</p>
+    <div style="border-left:1px solid var(--gold);padding-left:24px;margin-bottom:40px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;font-weight:300;color:var(--moss);line-height:1.8;">
+        "子どもの口に入るものは、<br>すべて本物であってほしい。<br>食と環境と愛情が重なる場所を<br>つくりたくて、この園を開きました。"
+      </p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Credentials</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:center;gap:16px;border-top:1px solid var(--linen);padding-top:12px;">
+          <span style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:13px;color:var(--charcoal);">アスリートフードマイスター 2級</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;border-top:1px solid var(--linen);padding-top:12px;">
+          <span style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:13px;color:var(--charcoal);">腸活プランナー</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;border-top:1px solid var(--linen);padding-top:12px;">
+          <span style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:13px;color:var(--charcoal);">ナチュラルフードコーディネーター</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="cta-left fade-in">
+    <p class="section-label">Visit Us</p>
+    <h2 class="section-title-jp">見学のご予約</h2>
+    <div class="divider"></div>
+    <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:14px;line-height:2.4;color:var(--bark);">
+      月に2〜4組限定で見学をお受けしています。<br>
+      お子さまと一緒に、ぜひ実際の空気を感じにきてください。<br><br>
+      見学は無料。入園の強制はありません。<br>
+      ただ、この場所が誰かのための「答え」であれば、<br>
+      それ以上に嬉しいことはありません。
+    </p>
+    <div style="margin-top:48px;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">Access</p>
+      <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:13px;line-height:2.2;color:var(--bark);">
+        福岡県春日市若葉台東4丁目12-3<br>
+        開園時間：8:30〜17:30
+      </p>
+    </div>
+  </div>
+  <div class="cta-right fade-in" style="display:flex;flex-direction:column;justify-content:center;gap:32px;">
+    <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:14px;line-height:2.4;color:var(--bark);">
+      見学のご予約・ご質問は<br>
+      公式LINEからお気軽にどうぞ。<br><br>
+      「見学希望」とひとこと送るだけでOKです。
+    </p>
+    <a href="https://lin.ee/p0Ya4" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;font-family:'Noto Sans JP',sans-serif;font-weight:300;font-size:13px;letter-spacing:0.2em;color:var(--cream);background:var(--moss);border:none;padding:20px 40px;cursor:pointer;text-decoration:none;transition:all 0.3s ease;align-self:flex-start;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 2C5.582 2 2 5.134 2 9c0 2.56 1.476 4.8 3.718 6.12L5 16.5l1.8-.6C7.788 16.284 8.876 16.5 10 16.5c4.418 0 8-3.134 8-7s-3.582-7-8-7z" fill="white"/>
+      </svg>
+      LINEで見学を予約する
+    </a>
+    <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:12px;line-height:2;color:var(--stone);">
+      プレッシャーはありません。<br>
+      質問だけでも、情報収集だけでも、歓迎です。
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="nav-logo">
+      とびたて！保育園
+      <span>Tobitatsu Hoikuen · Kasuga, Fukuoka</span>
+    </div>
+    <p class="footer-desc">
+      0〜2歳・定員14名の少人数制<br>
+      認可外保育施設<br>
+      オーガニック給食 · レッジョ · ベビーヨガ<br>
+      月極保育 · 一時預かり
+    </p>
+  </div>
+  <div>
+    <p class="footer-col-title">Navigation</p>
+    <ul class="footer-links">
+      <li><a href="#concept">保育理念</a></li>
+      <li><a href="#experience">一日の過ごし方</a></li>
+      <li><a href="#food">食について</a></li>
+      <li><a href="#price">ご利用案内</a></li>
+      <li><a href="#flow">入園の流れ</a></li>
+      <li><a href="#contact">見学予約</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Contact</p>
+    <p class="footer-info">
+      福岡県春日市若葉台東4丁目12-3<br>
+      開園時間：8:30〜17:30<br><br>
+      TEL: 092-984-5377<br>
+      見学予約・お問い合わせ<br>
+      公式LINE：lin.ee/p0Ya4<br>
+      Instagram：@tbt_nursery_2026
+    </p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p class="footer-copy">© 2026 とびたて！保育園. All rights reserved.</p>
+  <p class="footer-copy">Kasuga, Fukuoka · Certified Childcare Facility</p>
+</div>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Staggered experience items
+  const expItems = document.querySelectorAll('.experience-item.fade-in');
+  const expObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const index = Array.from(expItems).indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), index * 100);
+      }
+    });
+  }, { threshold: 0.05 });
+  expItems.forEach(el => expObserver.observe(el));
+</script>
+</body>
+</html>
