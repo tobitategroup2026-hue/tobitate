@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -999,12 +1000,58 @@
   }
 
   /* ─── RESPONSIVE ─── */
+  /* Mobile photo grids */
+  @media (max-width: 768px) {
+    /* Hero */
+    .hero { grid-template-columns: 1fr !important; min-height: auto; }
+    .hero-left { padding: 100px 24px 48px !important; }
+    .hero-right { height: 70vw !important; }
+    .hero-title { font-size: 36px !important; }
+
+    /* Sections padding */
+    .concept { padding: 60px 24px !important; grid-template-columns: 1fr !important; gap: 40px !important; }
+    .experience { padding: 60px 24px !important; }
+    .experience-grid { grid-template-columns: 1fr !important; }
+    .food-section { padding: 60px 24px !important; }
+    .food-header { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .food-items { grid-template-columns: 1fr !important; }
+    .price-section { padding: 60px 24px !important; }
+    .price-card { padding: 32px 20px !important; }
+    .price-list { grid-template-columns: 1fr !important; }
+    .flow-section { padding: 60px 24px !important; }
+    .line-section { padding: 60px 24px !important; }
+    .cta-section { padding: 60px 24px !important; grid-template-columns: 1fr !important; }
+    .cta-left { padding-right: 0 !important; border-right: none !important; border-bottom: 1px solid var(--linen) !important; padding-bottom: 40px !important; margin-bottom: 40px !important; }
+    .cta-right { padding-left: 0 !important; }
+    footer { padding: 48px 24px !important; grid-template-columns: 1fr !important; }
+    .footer-bottom { padding: 20px 24px !important; flex-direction: column !important; gap: 8px !important; }
+
+    /* Photo grids mobile */
+    [style*="grid-template-columns:1fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
+    [style*="grid-template-columns:1.2fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr 1.2fr"] { grid-template-columns: 1fr 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
+    [style*="grid-template-columns:1.5fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
+
+    /* Director mobile */
+    #director-grid { grid-template-columns: 1fr !important; }
+    #director-grid > div:first-child { max-width: 280px; margin: 0 auto; }
+
+    /* Price grid mobile */
+    [style*="grid-template-columns:1fr 1fr;gap:24px"] { grid-template-columns: 1fr !important; }
+
+    /* YouTube bigger on mobile */
+    .youtube-section { padding: 40px 0 !important; }
+  }
+
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
     .hero { grid-template-columns: 1fr; }
     .hero-right { height: 45vw; }
     .hero-left { padding: 60px 24px; }
+    #director-grid { grid-template-columns: 1fr !important; }
     .concept { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
     .experience { padding: 80px 24px; }
     .experience-grid { grid-template-columns: 1fr; }
@@ -1080,12 +1127,15 @@
   <div style="aspect-ratio:4/3;overflow:hidden;">
     <img src="img_room3.jpeg" alt="探求の道具" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
   </div>
+  </div>
 </section>
 
 <!-- VIDEO -->
-<section style="background:var(--warm-black);padding:80px;text-align:center;">
-  <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;">Our Story</p>
-  <div style="max-width:800px;margin:0 auto;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid rgba(200,191,176,0.1);">
+<section class="youtube-section" style="background:var(--warm-black);padding:80px 0;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(92,107,82,0.15) 0%,transparent 70%);pointer-events:none;"></div>
+  <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;position:relative;z-index:1;">Our Story</p>
+  <h3 style="font-family:'Noto Serif JP',serif;font-weight:200;font-size:22px;color:var(--linen);letter-spacing:0.1em;margin-bottom:40px;position:relative;z-index:1;">とびたて保育園の、一日。</h3>
+  <div style="max-width:960px;margin:0 auto;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
     <iframe
       src="https://www.youtube.com/embed/HSCzmZ9Wz4o"
       title="とびたて！保育園"
@@ -1256,7 +1306,7 @@
         <img src="img_materials.jpeg" alt="自然素材" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
       <div style="overflow:hidden;aspect-ratio:4/3;">
-        <img src="img_soil2.jpeg" alt="外遊び" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        <img src="img_soil2.jpeg" alt="外遊び" style="width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     </div>
   </div>
@@ -1280,12 +1330,12 @@
         <img src="img_snack.jpeg" alt="麹おやつ" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:4px;margin-top:4px;">
-      <div style="overflow:hidden;aspect-ratio:16/7;">
-        <img src="img_food3.jpeg" alt="オーガニック給食" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;">
+      <div style="overflow:hidden;aspect-ratio:4/3;">
+        <img src="img_food3.jpeg" alt="オーガニック給食" style="width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
-      <div style="overflow:hidden;aspect-ratio:16/7;">
-        <img src="img_drink.jpeg" alt="甘酒を飲む子ども" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+      <div style="overflow:hidden;aspect-ratio:4/3;">
+        <img src="img_drink.jpeg" alt="甘酒を飲む子ども" style="width:100%;height:100%;object-fit:cover;object-position:center 60%;transition:transform 0.6s ease;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
       </div>
     </div>
   </div>
@@ -1507,12 +1557,12 @@
 </section>
 
 <!-- DIRECTOR -->
-<section style="padding:120px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:center;">
+<section style="padding:80px 40px;max-width:1200px;margin:0 auto;">
+  <div id="director-grid" style="display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:center;">
   <div style="position:relative;">
-    <div style="aspect-ratio:3/4;overflow:hidden;">
+    <div style="aspect-ratio:3/4;overflow:hidden;width:100%;">
       <img src="img_director.jpeg" alt="園長 大戸ちえ" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
     </div>
-    <div style="position:absolute;bottom:-20px;left:-20px;width:120px;height:120px;border:1px solid var(--gold);z-index:-1;"></div>
   </div>
   <div>
     <p style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Director</p>
