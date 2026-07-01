@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一時預かりレポート｜とびたて！保育園</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Hiragino Sans','Meiryo',sans-serif; background:#EFEFEF; padding:16px; }
+
+/* ======== 入力画面 ======== */
+.input-screen { max-width:480px; margin:0 auto; }
+
+.hd {
+  background:#1A1A1A; color:white;
+  padding:16px; border-radius:10px;
+  margin-bottom:14px; text-align:center;
+}
+.hd h1 { font-size:16px; font-weight:500; margin-bottom:3px; letter-spacing:.05em; }
+.hd p  { font-size:11px; opacity:.7; letter-spacing:.08em; }
+
+.card {
+  background:white; border-radius:10px;
+  padding:14px 16px; margin-bottom:10px;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+.card label {
+  font-size:11px; font-weight:500; color:#444;
+  display:block; margin-bottom:7px; letter-spacing:.05em;
+}
+.card input[type=text],
+.card input[type=date],
+.card textarea,
+.card select {
+  width:100%; border:1.5px solid #E0E0E0; border-radius:8px;
+  padding:10px 12px; font-size:14px; font-family:inherit;
+  color:#1A1A1A; background:white; -webkit-appearance:none;
+}
+.card textarea { resize:vertical; min-height:80px; line-height:1.7; }
+.card input:focus, .card textarea:focus, .card select:focus {
+  border-color:#1A1A1A; outline:none;
+}
+.row2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+/* 写真 */
+.photo-area { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.photo-box {
+  border:2px dashed #CCC; border-radius:10px;
+  aspect-ratio:4/3; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  cursor:pointer; overflow:hidden; position:relative;
+  background:#FAFAFA; transition:border-color .2s;
+}
+.photo-box:hover { border-color:#888; }
+.photo-box img {
+  width:100%; height:100%; object-fit:cover;
+  position:absolute; top:0; left:0;
+}
+.photo-box .ph-label { font-size:10px; color:#AAA; text-align:center; z-index:1; }
+.photo-box .ph-icon  { font-size:26px; margin-bottom:4px; }
+.photo-box input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+
+/* 印刷ボタン */
+.print-btn {
+  width:100%; background:#1A1A1A; color:white;
+  border:none; border-radius:12px; padding:17px;
+  font-size:16px; font-family:inherit; cursor:pointer;
+  margin-bottom:30px; font-weight:500; letter-spacing:.05em;
+}
+.print-btn:active { background:#333; }
+
+/* ======== 印刷用ページ ======== */
+.print-page { display:none; }
+
+@media print {
+  * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { background:white; padding:0; margin:0; }
+  .input-screen { display:none !important; }
+  .print-page {
+    display:block !important;
+    width:210mm; min-height:297mm;
+    padding:16mm 16mm 14mm;
+    background:white;
+    font-family:'Hiragino Sans','Meiryo',sans-serif;
+  }
+  @page { margin:0; size:A4 portrait; }
+}
+
+/* ── 印刷用スタイル ── */
+.pp-header {
+  border-bottom:3px solid #1A1A1A;
+  padding-bottom:10px;
+  margin-bottom:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+.pp-header-left h1 {
+  font-size:22px; font-weight:500;
+  letter-spacing:.08em; color:#1A1A1A;
+  margin-bottom:3px;
+}
+.pp-header-left p {
+  font-size:10px; color:#666; letter-spacing:.1em;
+}
+.pp-header-right {
+  text-align:right; font-size:10px; color:#666; line-height:1.7;
+}
+.pp-header-right strong { font-size:12px; color:#1A1A1A; }
+
+/* 基本情報 */
+.pp-info {
+  display:grid; grid-template-columns:2fr 1.2fr 1.5fr;
+  gap:8px; margin-bottom:12px;
+}
+.pp-info-cell {
+  border:1px solid #CCCCCC; padding:7px 10px;
+}
+.pp-info-cell .lbl {
+  font-size:8.5px; color:#888; letter-spacing:.08em;
+  margin-bottom:3px; text-transform:uppercase;
+}
+.pp-info-cell .val {
+  font-size:13px; color:#1A1A1A; font-weight:500;
+}
+
+/* セクション */
+.pp-section { margin-bottom:10px; }
+.pp-sec-title {
+  font-size:9px; font-weight:500; letter-spacing:.12em;
+  color:#1A1A1A; border-bottom:1.5px solid #1A1A1A;
+  padding-bottom:3px; margin-bottom:6px;
+  text-transform:uppercase;
+}
+.pp-sec-body {
+  font-size:11px; color:#1A1A1A; line-height:1.85;
+  padding:8px 10px; border:1px solid #CCCCCC;
+  min-height:48px; white-space:pre-wrap;
+}
+
+/* 2カラム */
+.pp-2col { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+
+/* 写真 */
+.pp-photos { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+.pp-photo {
+  aspect-ratio:4/3; border:1px solid #CCCCCC; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.pp-photo img { width:100%; height:100%; object-fit:cover; }
+.pp-photo .empty {
+  font-size:9px; color:#CCC; letter-spacing:.05em;
+}
+
+/* 担当者 */
+.pp-staff {
+  border-top:2px solid #1A1A1A;
+  padding-top:8px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.pp-staff-left { font-size:10px; color:#666; }
+.pp-staff-right { font-size:12px; font-weight:500; color:#1A1A1A; }
+
+/* フッター */
+.pp-footer {
+  margin-top:10px;
+  padding-top:6px;
+  border-top:1px solid #CCCCCC;
+  display:flex; justify-content:space-between;
+  font-size:8.5px; color:#999; letter-spacing:.05em;
+}
+</style>
+</head>
+<body>
+
+<!-- ======== 入力画面 ======== -->
+<div class="input-screen">
+
+  <div class="hd">
+    <h1>とびたて！保育園</h1>
+    <p>一時預かり　本日のレポート作成</p>
+  </div>
+
+  <div class="card">
+    <label>お子さまのお名前</label>
+    <input type="text" id="i_name" placeholder="例：田中 さくら">
+  </div>
+
+  <div class="card">
+    <div class="row2">
+      <div>
+        <label>利用日</label>
+        <input type="date" id="i_date">
+      </div>
+      <div>
+        <label>コース</label>
+        <select id="i_course">
+          <option value="半日（9:00〜13:00）">半日（9〜13時）</option>
+          <option value="1日（9:00〜15:30）">1日（9〜15:30）</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>担当保育士</label>
+    <input type="text" id="i_staff" placeholder="例：早野 由紀">
+  </div>
+
+  <div class="card">
+    <label>今日の様子</label>
+    <textarea id="i_today" placeholder="例：最初は少し泣いていましたが、すぐに慣れてお友達と一緒に遊びました。給食もよく食べました。"></textarea>
+  </div>
+
+  <div class="card">
+    <label>発達・発育について</label>
+    <textarea id="i_hattatsu" placeholder="例：つかまり立ちがとても上手になってきました。声を出して笑う場面が増えています。"></textarea>
+  </div>
+
+  <div class="card">
+    <div class="row2">
+      <div>
+        <label>食事・授乳の様子</label>
+        <textarea id="i_shokuji" style="min-height:70px;" placeholder="例：昼食完食。おやつも全部食べました。"></textarea>
+      </div>
+      <div>
+        <label>午睡・体調</label>
+        <textarea id="i_suimin" style="min-height:70px;" placeholder="例：12:30〜13:30に熟睡。体温36.8℃。"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>写真（2枚まで）</label>
+    <div class="photo-area">
+      <div class="photo-box" id="box1">
+        <div class="ph-icon">📷</div>
+        <div class="ph-label">写真1をタップ</div>
+        <input type="file" accept="image/*" onchange="loadPhoto(this,1)">
+      </div>
+      <div class="photo-box" id="box2">
+        <div class="ph-icon">📷</div>
+        <div class="ph-label">写真2をタップ</div>
+        <input type="file" accept="image/*" onchange="loadPhoto(this,2)">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>申し送り・次回へのひとこと</label>
+    <textarea id="i_memo" placeholder="例：次回は水遊びをしてみましょう。着替えを多めにお持ちください。" style="min-height:60px;"></textarea>
+  </div>
+
+  <button class="print-btn" onclick="doPrint()">🖨　印刷する</button>
+</div>
+
+<!-- ======== 印刷用ページ ======== -->
+<div class="print-page" id="print-page">
+
+  <div class="pp-header">
+    <div class="pp-header-left">
+      <h1>本日のレポート</h1>
+      <p>TOBITATE! HOIKUEN ／ DAILY REPORT</p>
+    </div>
+    <div class="pp-header-right">
+      <strong>とびたて！保育園</strong><br>
+      092-984-5377<br>
+      春日市若葉台東4丁目12-3
+    </div>
+  </div>
+
+  <div class="pp-info">
+    <div class="pp-info-cell">
+      <div class="lbl">お子さまのお名前</div>
+      <div class="val" id="p_name">—</div>
+    </div>
+    <div class="pp-info-cell">
+      <div class="lbl">利用日</div>
+      <div class="val" id="p_date">—</div>
+    </div>
+    <div class="pp-info-cell">
+      <div class="lbl">コース</div>
+      <div class="val" id="p_course">—</div>
+    </div>
+  </div>
+
+  <div class="pp-section">
+    <div class="pp-sec-title">今日の様子　Today's Activity</div>
+    <div class="pp-sec-body" id="p_today">—</div>
+  </div>
+
+  <div class="pp-section">
+    <div class="pp-sec-title">発達・発育について　Development Note</div>
+    <div class="pp-sec-body" id="p_hattatsu">—</div>
+  </div>
+
+  <div class="pp-photos">
+    <div class="pp-photo" id="p_photo1">
+      <div class="empty">Photo 1</div>
+    </div>
+    <div class="pp-photo" id="p_photo2">
+      <div class="empty">Photo 2</div>
+    </div>
+  </div>
+
+  <div class="pp-2col">
+    <div class="pp-section" style="margin-bottom:0">
+      <div class="pp-sec-title">食事・授乳　Meal</div>
+      <div class="pp-sec-body" id="p_shokuji" style="min-height:40px;">—</div>
+    </div>
+    <div class="pp-section" style="margin-bottom:0">
+      <div class="pp-sec-title">午睡・体調　Sleep / Health</div>
+      <div class="pp-sec-body" id="p_suimin" style="min-height:40px;">—</div>
+    </div>
+  </div>
+
+  <div class="pp-section" style="margin-top:10px;">
+    <div class="pp-sec-title">申し送り　Memo</div>
+    <div class="pp-sec-body" id="p_memo" style="min-height:36px;">—</div>
+  </div>
+
+  <div class="pp-staff">
+    <div class="pp-staff-left">担当保育士 Staff</div>
+    <div class="pp-staff-right" id="p_staff">—</div>
+  </div>
+
+  <div class="pp-footer">
+    <span>とびたて！保育園　092-984-5377　春日市若葉台東4丁目12-3</span>
+    <span id="p_footer_date">—</span>
+  </div>
+</div>
+
+<script>
+let photos = { 1:null, 2:null };
+
+// 今日の日付をデフォルト設定
+const t = new Date();
+document.getElementById('i_date').value =
+  `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+
+function loadPhoto(input, num) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    photos[num] = e.target.result;
+    const box = document.getElementById(`box${num}`);
+    box.querySelector('.ph-icon').style.display = 'none';
+    box.querySelector('.ph-label').style.display = 'none';
+    let img = box.querySelector('img');
+    if (!img) { img = document.createElement('img'); box.prepend(img); }
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function formatDate(str) {
+  if (!str) return '—';
+  const d = new Date(str);
+  const days = ['日','月','火','水','木','金','土'];
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
+}
+
+function doPrint() {
+  const name     = document.getElementById('i_name').value || '—';
+  const dateStr  = document.getElementById('i_date').value;
+  const date     = formatDate(dateStr);
+  const course   = document.getElementById('i_course').value;
+  const staff    = document.getElementById('i_staff').value || '—';
+  const today_v  = document.getElementById('i_today').value || '—';
+  const hattatsu = document.getElementById('i_hattatsu').value || '—';
+  const shokuji  = document.getElementById('i_shokuji').value || '—';
+  const suimin   = document.getElementById('i_suimin').value || '—';
+  const memo     = document.getElementById('i_memo').value || '—';
+
+  document.getElementById('p_name').textContent     = name;
+  document.getElementById('p_date').textContent     = date;
+  document.getElementById('p_course').textContent   = course;
+  document.getElementById('p_staff').textContent    = staff;
+  document.getElementById('p_today').textContent    = today_v;
+  document.getElementById('p_hattatsu').textContent = hattatsu;
+  document.getElementById('p_shokuji').textContent  = shokuji;
+  document.getElementById('p_suimin').textContent   = suimin;
+  document.getElementById('p_memo').textContent     = memo;
+  document.getElementById('p_footer_date').textContent = date;
+
+  for (let n of [1,2]) {
+    const wrap = document.getElementById(`p_photo${n}`);
+    wrap.innerHTML = photos[n]
+      ? `<img src="${photos[n]}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="empty">Photo ${n}</div>`;
+  }
+
+  window.print();
+}
+</script>
+</body>
+</html>
